@@ -6,10 +6,14 @@
     scroll-behavior: smooth;
 }
 
+/* Em style.css */
+
 :root {
     --bg-color: #0A0A0A;
     --text-color: #E0E0E0;
-    --accent-color: #0DF5E3;
+    /* ALTERE A LINHA ABAIXO */
+    --accent-color: #39FF14; /* Verde Fluorescente/Neon */
+    /* MANTENHA O RESTANTE DAS VARIÁVEIS */
     --detail-color: #333333;
     --input-bg-color: #1a1a1a;
     --card-bg-color: #16161a;
@@ -18,6 +22,27 @@
     --font-body: 'Inter', sans-serif;
 
     --header-height: 70px;
+}
+
+.cta-button {
+    display: inline-block;
+    background-color: var(--accent-color); /* Já usa a variável, então mudará para verde */
+    color: var(--bg-color); /* Importante manter bom contraste com o verde */
+    font-family: var(--font-title);
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 12px 30px;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+    /* Ajuste a cor da sombra para combinar com o verde fluorescente */
+    box-shadow: 0 4px 15px rgba(57, 255, 20, 0.3); /* RGBA para #39FF14 */
+}
+.cta-button:hover {
+    transform: translateY(-3px) scale(1.05);
+    /* Ajuste a cor de hover se necessário, ou crie uma variável para hover do acento */
+    background-color: #30e012; /* Um tom de verde ligeiramente mais escuro para hover */
+    box-shadow: 0 6px 20px rgba(57, 255, 20, 0.4); /* Sombra mais forte no hover */
 }
 
 body {
