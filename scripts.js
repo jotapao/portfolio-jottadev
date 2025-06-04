@@ -37,3 +37,22 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+
+    // Ativar link da navegação conforme scroll
+    const sections = document.querySelectorAll('main section[id]');
+    function setActiveLink() {
+        let currentSectionId = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop - headerHeight - 50; // Ajuste o offset
+            if (window.pageYOffset >= sectionTop) {
+                currentSectionId = section.getAttribute('id');
+            }
+        });
+
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === `#${currentSectionId}`) {
+                link.classList.add('active');
+            }
+        });
+    }
