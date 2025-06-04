@@ -103,3 +103,38 @@ document.addEventListener('DOMContentLoaded', () => {
     if (currentYearSpan) {
         currentYearSpan.textContent = new Date().getFullYear();
     }
+
+     // Modal de Projetos (Exemplo Básico)
+    const projectDetailButtons = document.querySelectorAll('.project-details-button');
+    const modal = document.getElementById('project-modal');
+    const closeModalButton = document.querySelector('.close-modal-button');
+    const modalProjectTitle = document.getElementById('modal-project-title');
+    const modalProjectImage = document.getElementById('modal-project-image');
+    const modalProjectDescription = document.getElementById('modal-project-description'); // Div pai
+    const modalProjectLink = document.getElementById('modal-project-link');
+    // Elementos internos da descrição
+    const modalProjectChallenges = document.getElementById('modal-project-challenges');
+    const modalProjectSolutions = document.getElementById('modal-project-solutions');
+    const modalProjectTags = document.getElementById('modal-project-tags');
+
+
+    // Dados de exemplo para os projetos (substitua com dados reais)
+    const projectData = {
+        alpha: {
+            title: "Sistema de Gestão XPTO",
+            image: "https://via.placeholder.com/600x350.png?text=Detalhe+Projeto+Alpha",
+            description: "Uma plataforma web robusta desenvolvida para otimizar os processos internos da empresa XPTO, resultando em um aumento de 30% na eficiência operacional. O sistema inclui módulos de gerenciamento de clientes, faturamento e relatórios analíticos.",
+            challenges: ["Integrar com sistemas legados.", "Garantir alta performance com grande volume de dados.", "Interface intuitiva para usuários não técnicos."],
+            solutions: ["API de integração customizada.", "Otimização de queries e cache.", "Workshops de UX com os stakeholders."],
+            tags: ["React", "Node.js", "MongoDB", "UX Design"],
+            link: "#" // Link real do projeto
+        },
+        inova: {
+            title: "App Mobile InovaHealth",
+            image: "https://via.placeholder.com/600x350.png?text=Detalhe+App+Inova",
+            description: "Aplicativo móvel para iOS e Android que facilita o agendamento de consultas e o acompanhamento de tratamentos de saúde. Foco em uma experiência de usuário simples e acessível.",
+            challenges: ["Segurança dos dados do paciente (LGPD).", "Performance em dispositivos variados.", "Notificações em tempo real."],
+            solutions: ["Criptografia ponta-a-ponta e conformidade com LGPD.", "Desenvolvimento nativo otimizado.", "Uso de Firebase Cloud Messaging."],
+            tags: ["React Native", "Firebase", "UX/UI Mobile"],
+            link: "#" // Link real do projeto
+        }
