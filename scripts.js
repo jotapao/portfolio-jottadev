@@ -74,3 +74,26 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+
+    // Animações On-Scroll com Intersection Observer
+    const animatedElements = document.querySelectorAll('.animate-on-scroll');
+    const observerOptions = {
+        root: null, // viewport
+        rootMargin: '0px',
+        threshold: 0.1 // % do elemento visível para disparar
+    };
+
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                // observer.unobserve(entry.target); // Descomente se quiser que a animação ocorra apenas uma vez
+            } else {
+                // entry.target.classList.remove('is-visible'); // Descomente se quiser que a animação reverta ao sair da tela
+            }
+        });
+    }, observerOptions);
+
+    animatedElements.forEach(el => {
+        observer.observe(el);
+    });
