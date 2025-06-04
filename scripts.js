@@ -55,4 +55,22 @@ document.addEventListener('DOMContentLoaded', () => {
                 link.classList.add('active');
             }
         });
+    } 
+
+     window.addEventListener('scroll', setActiveLink);
+    setActiveLink(); // Define o link ativo no carregamento da página
+
+
+    // Menu Mobile Toggle
+    const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+    const mainNavUl = document.querySelector('#main-header nav ul');
+    if (mobileMenuToggle && mainNavUl) {
+        mobileMenuToggle.addEventListener('click', () => {
+            mainNavUl.classList.toggle('active');
+            if (mainNavUl.classList.contains('active')) {
+                mobileMenuToggle.innerHTML = '<i class="fas fa-times"></i>';
+            } else {
+                mobileMenuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+            }
+        });
     }
