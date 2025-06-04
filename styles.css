@@ -1,19 +1,10 @@
 /* Reset Básico e Variáveis Globais */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    scroll-behavior: smooth;
-}
-
 /* Em style.css */
 
 :root {
     --bg-color: #0A0A0A;
     --text-color: #E0E0E0;
-    /* ALTERE A LINHA ABAIXO */
-    --accent-color: #39FF14; /* Verde Fluorescente/Neon */
-    /* MANTENHA O RESTANTE DAS VARIÁVEIS */
+    --accent-color: #39FF14; /* Verde Fluorescente/Neon CORRIGIDO */
     --detail-color: #333333;
     --input-bg-color: #1a1a1a;
     --card-bg-color: #16161a;
@@ -24,34 +15,24 @@
     --header-height: 70px;
 }
 
-.cta-button {
-    display: inline-block;
-    background-color: var(--accent-color); /* Já usa a variável, então mudará para verde */
-    color: var(--bg-color); /* Importante manter bom contraste com o verde */
-    font-family: var(--font-title);
-    font-weight: 600;
-    font-size: 1rem;
-    padding: 12px 30px;
-    border-radius: 50px;
-    text-decoration: none;
-    transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
-    /* Ajuste a cor da sombra para combinar com o verde fluorescente */
-    box-shadow: 0 4px 15px rgba(57, 255, 20, 0.3); /* RGBA para #39FF14 */
-}
-.cta-button:hover {
-    transform: translateY(-3px) scale(1.05);
-    /* Ajuste a cor de hover se necessário, ou crie uma variável para hover do acento */
-    background-color: #30e012; /* Um tom de verde ligeiramente mais escuro para hover */
-    box-shadow: 0 6px 20px rgba(57, 255, 20, 0.4); /* Sombra mais forte no hover */
-}
-
 body {
     font-family: var(--font-body);
     background-color: var(--bg-color);
     color: var(--text-color);
     line-height: 1.7;
     overflow-x: hidden; /* Prevenir scroll horizontal */
+    margin: 0; /* Adicionado para garantir reset */
+    padding: 0; /* Adicionado para garantir reset */
 }
+
+/* Reset Básico e Variáveis Globais (já incluso em body e root, mas garantindo) */
+* {
+    margin: 0; /* Movido para body e :root para especificidade, mas pode ficar aqui se preferir um reset mais forte */
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
 
 /* Preloader */
 #preloader {
@@ -65,7 +46,7 @@ body {
     justify-content: center;
     align-items: center;
     z-index: 9999;
-    transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+    transition: opacity 0.5s ease-out, visibility 0.5s ease-out 0.5s; /* Adicionado delay para visibility */
 }
 
 #preloader.loaded {
@@ -93,7 +74,7 @@ body {
     left: 0;
     width: 100%;
     height: var(--header-height);
-    background-color: rgba(10, 10, 10, 0.8);
+    background-color: rgba(10, 10, 10, 0.8); /* Era 0,0,0,0.8 - ajustado para o bg-color */
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     z-index: 1000;
@@ -128,9 +109,9 @@ body {
     color: var(--text-color);
     text-decoration: none;
     font-family: var(--font-title);
-    font-weight: 600;
+    font-weight: 600; /* Era 500, ajustado para consistência com outros títulos */
     padding: 10px 15px;
-    margin: 0 5px;
+    margin: 0 5px; /* Era 0 10px */
     position: relative;
     transition: color 0.3s ease;
 }
@@ -143,7 +124,7 @@ body {
 #main-header nav ul li a::after {
     content: '';
     position: absolute;
-    bottom: 0;
+    bottom: 0; /* Era 5px */
     left: 50%;
     transform: translateX(-50%);
     width: 0;
@@ -154,11 +135,11 @@ body {
 
 #main-header nav ul li a:hover::after,
 #main-header nav ul li a.active::after {
-    width: 70%;
+    width: 70%; /* Era 100% */
 }
 
 #mobile-menu-toggle {
-    display: none; /* Escondido em desktop */
+    display: none;
     background: none;
     border: none;
     color: var(--text-color);
@@ -175,15 +156,18 @@ body {
     justify-content: center;
     align-items: center;
     position: relative;
-    padding-top: var(--header-height); /* Para não ficar atrás do header */
+    padding-top: var(--header-height);
+    /* overflow: hidden;  Removido para não cortar sombras ou elementos animados que saiam um pouco */
 }
 
 .content-section {
     padding: 80px 0;
-    padding-top: calc(var(--header-height) + 40px); /* Espaço extra para o header */
+    /* A lógica de padding-top para compensar o header é complexa e pode ser melhorada
+       com um elemento "spacer" ou ajustando o scroll do JS. Por ora, vou simplificar.
+       O scroll-margin-top no elemento alvo do link é uma abordagem mais moderna. */
 }
-.content-section:first-of-type {
-     padding-top: var(--header-height); /* Hero não precisa de padding extra */
+main section[id] { /* Adiciona margem no topo para compensar o header fixo ao navegar */
+    scroll-margin-top: var(--header-height);
 }
 
 
@@ -225,15 +209,18 @@ body {
     font-weight: 600;
     font-size: 1rem;
     padding: 12px 30px;
-    border-radius: 50px;
+    border-radius: 50px; /* Era 5px */
     text-decoration: none;
     transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0 4px 15px rgba(13, 245, 227, 0.3);
+    border: 2px solid transparent; /* Para manter o tamanho no hover se a borda aparecer */
+    box-shadow: 0 4px 15px rgba(57, 255, 20, 0.3); /* RGBA para #39FF14 */
 }
 .cta-button:hover {
     transform: translateY(-3px) scale(1.05);
-    background-color: #0bc4b3; /* Um pouco mais escuro */
-    box-shadow: 0 6px 20px rgba(13, 245, 227, 0.4);
+    background-color: #30e012; /* Tom de verde mais escuro para hover */
+    box-shadow: 0 6px 20px rgba(57, 255, 20, 0.4);
+    /* color: var(--accent-color); */ /* Removido, pois o texto deve contrastar com o bg do botão */
+    /* border-color: var(--accent-color); */ /* Removido, a menos que queira um efeito de outline no hover */
 }
 .cta-button i { margin-left: 8px; }
 
@@ -241,26 +228,25 @@ body {
 /* Seção Hero */
 #hero {
     text-align: center;
-    overflow: hidden; /* Para background/overlay */
+    overflow: hidden;
 }
-.hero-background { /* Placeholder para vídeo ou imagem de fundo */
+.hero-background {
     position: absolute;
     top: 0; left: 0; width: 100%; height: 100%;
-    background: linear-gradient(45deg, #0d0f12, #1a1c20); /* Exemplo de fundo */
+    background: linear-gradient(45deg, var(--bg-color), #1a1c20); /* Usando variável */
     z-index: -2;
-    /* Adicionar aqui imagem de fundo ou partículas via JS/CSS */
 }
 .hero-overlay {
     position: absolute;
     top: 0; left: 0; width: 100%; height: 100%;
-    background-color: rgba(0,0,0,0.6);
+    background-color: rgba(0,0,0,0.6); /* Mantido como preto para overlay */
     z-index: -1;
 }
 #hero h1 {
     font-family: var(--font-title);
     font-size: 4.5rem;
     font-weight: 700;
-    color: #fff;
+    color: #fff; /* Mantido branco para destaque sobre overlay */
     margin-bottom: 10px;
     letter-spacing: 1px;
 }
@@ -287,17 +273,19 @@ body {
 .about-image {
     flex: 1;
     min-width: 280px;
+    text-align: center; /* Para centralizar a imagem se for menor */
 }
 .about-image img {
     width: 100%;
-    max-width: 400px;
+    max-width: 350px; /* Ajustado para não ficar muito grande */
     border-radius: 10px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.3);
     transition: transform 0.4s ease, box-shadow 0.4s ease;
+    display: inline-block; /* Para text-align center funcionar */
 }
 .about-image img:hover {
     transform: scale(1.03);
-    box-shadow: 0 15px 35px rgba(13, 245, 227, 0.2);
+    box-shadow: 0 15px 35px rgba(57, 255, 20, 0.2); /* Sombra com a cor verde */
 }
 .about-text {
     flex: 1.5;
@@ -322,22 +310,30 @@ body {
     border-radius: 10px;
     text-align: center;
     border: 1px solid var(--detail-color);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 }
 .skill-card:hover {
     transform: translateY(-10px);
-    box-shadow: 0 10px 25px rgba(13, 245, 227, 0.15);
+    box-shadow: 0 10px 25px rgba(57, 255, 20, 0.15); /* Sombra verde */
+    border-color: var(--accent-color); /* Borda acentuada no hover */
 }
 .skill-card i {
     font-size: 3rem;
     color: var(--accent-color);
     margin-bottom: 20px;
+    display: block; /* Para garantir margem correta */
 }
 .skill-card h4 {
     font-family: var(--font-title);
     font-size: 1.4rem;
     margin-bottom: 10px;
+    color: var(--text-color); /* Garantindo cor do texto */
 }
+.skill-card p {
+    font-size: 0.9rem; /* Reduzido para melhor encaixe */
+    color: #b0b0b0; /* Texto da descrição um pouco mais suave */
+}
+
 
 /* Seção Projetos */
 .projects-grid {
@@ -350,19 +346,21 @@ body {
     border-radius: 10px;
     overflow: hidden;
     border: 1px solid var(--detail-color);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
     display: flex;
     flex-direction: column;
 }
 .project-card:hover {
     transform: translateY(-10px);
-    box-shadow: 0 10px 25px rgba(13, 245, 227, 0.2);
+    box-shadow: 0 10px 25px rgba(57, 255, 20, 0.2); /* Sombra verde */
+    border-color: var(--accent-color);
 }
 .project-card img {
     width: 100%;
     height: 220px;
     object-fit: cover;
     transition: transform 0.4s ease;
+    display: block; /* Remove espaço extra abaixo da imagem */
 }
 .project-card:hover img {
     transform: scale(1.05);
@@ -377,14 +375,19 @@ body {
     font-family: var(--font-title);
     font-size: 1.5rem;
     margin-bottom: 10px;
+    color: var(--text-color); /* Garantindo cor */
 }
 .project-info p {
     font-size: 0.95rem;
     margin-bottom: 15px;
     flex-grow: 1;
+    color: #b0b0b0;
 }
 .project-tags {
     margin-bottom: 20px;
+    display: flex; /* Para alinhar tags */
+    flex-wrap: wrap;
+    gap: 5px;
 }
 .project-tags span {
     background-color: var(--detail-color);
@@ -392,8 +395,7 @@ body {
     font-size: 0.8rem;
     padding: 4px 10px;
     border-radius: 15px;
-    margin-right: 5px;
-    margin-bottom: 5px;
+    /* margin-right: 5px; margin-bottom: 5px; (substituído por gap) */
     display: inline-block;
 }
 .project-details-button {
@@ -406,7 +408,8 @@ body {
     font-family: var(--font-title);
     font-weight: 600;
     transition: background-color 0.3s ease, color 0.3s ease;
-    align-self: flex-start;
+    align-self: flex-start; /* Mantido */
+    margin-top: auto; /* Empurra o botão para baixo se o texto for curto */
 }
 .project-details-button:hover {
     background-color: var(--accent-color);
@@ -414,31 +417,39 @@ body {
 }
 
 /* Seção Serviços */
-.services-grid { /* Similar ao skills-grid */
+.services-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 30px;
 }
-.service-card { /* Similar ao skill-card */
+.service-card {
     background-color: var(--card-bg-color);
     padding: 30px;
     border-radius: 10px;
     border: 1px solid var(--detail-color);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    text-align: center; /* Adicionado para centralizar conteúdo */
 }
 .service-card:hover {
     transform: translateY(-10px);
-    box-shadow: 0 10px 25px rgba(13, 245, 227, 0.1);
+    box-shadow: 0 10px 25px rgba(57, 255, 20, 0.1); /* Sombra verde */
+    border-color: var(--accent-color);
 }
 .service-card i {
     font-size: 2.8rem;
     color: var(--accent-color);
     margin-bottom: 20px;
+    display: block; /* Garante margem */
 }
 .service-card h4 {
     font-family: var(--font-title);
     font-size: 1.3rem;
     margin-bottom: 10px;
+    color: var(--text-color);
+}
+.service-card p {
+    font-size: 0.9rem;
+    color: #b0b0b0;
 }
 
 
@@ -449,47 +460,50 @@ body {
 }
 .form-group {
     position: relative;
-    margin-bottom: 30px;
+    margin-bottom: 30px; /* Aumentado para melhor espaçamento com label flutuante */
 }
 .form-group input,
 .form-group textarea {
     width: 100%;
-    padding: 12px 15px;
+    padding: 15px; /* Aumentado padding */
     background-color: var(--input-bg-color);
     border: 1px solid var(--detail-color);
     color: var(--text-color);
     border-radius: 5px;
     font-size: 1rem;
     font-family: var(--font-body);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 .form-group input:focus,
 .form-group textarea:focus {
     outline: none;
     border-color: var(--accent-color);
-    box-shadow: 0 0 0 2px rgba(13, 245, 227, 0.3);
+    box-shadow: 0 0 0 3px rgba(57, 255, 20, 0.25); /* Sombra verde */
 }
 .form-group label {
     position: absolute;
-    top: 12px;
+    top: 15px; /* Ajustado com o padding do input */
     left: 15px;
     color: #aaa;
     pointer-events: none;
     transition: all 0.2s ease;
     font-size: 1rem;
+    background-color: var(--input-bg-color); /* Para cobrir a borda do input quando flutua */
+    padding: 0 5px;
 }
 .form-group input:focus + label,
 .form-group input:valid + label,
 .form-group textarea:focus + label,
 .form-group textarea:valid + label {
-    top: -10px;
+    top: -10px; /* Ajustado para subir mais */
     left: 10px;
     font-size: 0.8rem;
     color: var(--accent-color);
-    background-color: var(--bg-color);
-    padding: 0 5px;
+    /* background-color: var(--bg-color); (removido, o bg do input é melhor) */
 }
-#contact-form button {
+#contact-form button[type="submit"] { /* Mais específico */
     width: 100%;
+    /* Estilos do .cta-button serão aplicados, mas podemos adicionar mais aqui se necessário */
 }
 .contact-info {
     text-align: center;
@@ -499,8 +513,9 @@ body {
 .contact-info a {
     color: var(--accent-color);
     text-decoration: none;
+    transition: color 0.3s ease; /* Adicionado transição */
 }
-.contact-info a:hover { text-decoration: underline; }
+.contact-info a:hover { text-decoration: underline; color: var(--text-color); } /* Mudança de cor no hover */
 .social-links { margin-top: 20px; }
 .social-links a {
     color: var(--text-color);
@@ -510,69 +525,102 @@ body {
 }
 .social-links a:hover {
     color: var(--accent-color);
-    transform: scale(1.1);
+    transform: translateY(-3px); /* Efeito de levantar */
 }
 
 /* Footer */
 footer {
     text-align: center;
-    padding: 20px;
-    background-color: var(--detail-color);
+    padding: 30px 20px; /* Aumentado padding */
+    background-color: var(--detail-color); /* Era var(--bg-color), alterado para mais contraste */
     font-size: 0.9rem;
+    border-top: 1px solid #444; /* Linha sutil no topo */
 }
 
 /* Modal */
 .modal {
-    display: none; /* Escondido por padrão */
+    display: none;
     position: fixed;
     z-index: 2000;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
-    overflow: auto;
-    background-color: rgba(0,0,0,0.8);
-    backdrop-filter: blur(5px);
+    overflow: auto; /* Permitir scroll no modal se o conteúdo for grande */
+    background-color: rgba(0,0,0,0.85); /* Mais escuro */
+    backdrop-filter: blur(8px); /* Aumentado blur */
+    -webkit-backdrop-filter: blur(8px);
 }
 .modal-content {
-    background-color: var(--card-bg-color);
-    margin: 10% auto;
-    padding: 30px;
+    background-color: var(--card-bg-color); /* Era var(--bg-color) */
+    margin: 5% auto; /* Menor margem para modais maiores */
+    padding: 30px 35px; /* Aumentado padding */
     border: 1px solid var(--detail-color);
     width: 90%;
-    max-width: 700px;
+    max-width: 750px; /* Aumentado max-width */
     border-radius: 10px;
     position: relative;
-    animation: slideInModal 0.5s ease-out;
+    animation: slideInModal 0.4s ease-out; /* Duração ajustada */
+    box-shadow: 0 10px 40px rgba(0,0,0,0.5); /* Sombra mais forte */
 }
 @keyframes slideInModal {
-    from { transform: translateY(-50px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
+    from { transform: translateY(-50px) scale(0.95); opacity: 0; } /* Adicionado scale */
+    to { transform: translateY(0) scale(1); opacity: 1; }
 }
 .close-modal-button {
     color: #aaa;
     position: absolute;
     top: 15px;
-    right: 25px;
-    font-size: 28px;
+    right: 20px; /* Ajustado */
+    font-size: 2rem; /* Aumentado */
     font-weight: bold;
     cursor: pointer;
+    transition: color 0.3s ease, transform 0.3s ease;
+    line-height: 1; /* Para melhor alinhamento do X */
 }
 .close-modal-button:hover,
 .close-modal-button:focus {
     color: var(--accent-color);
+    transform: rotate(90deg); /* Efeito no hover */
     text-decoration: none;
 }
 #modal-project-title {
     font-family: var(--font-title);
     color: var(--accent-color);
     margin-bottom: 20px;
+    font-size: 1.8rem; /* Aumentado */
+}
+#modal-project-image {
+    width:100%;
+    max-height: 350px; /* Aumentado */
+    object-fit: cover;
+    margin-bottom: 20px; /* Aumentado */
+    border-radius: 6px; /* Bordas arredondadas */
 }
 #modal-project-description ul {
     list-style-position: inside;
     margin-bottom: 15px;
+    padding-left: 0; /* Removido padding padrão da lista */
 }
-#modal-project-description h4 { margin-top: 15px; margin-bottom: 5px; color: var(--accent-color);}
+#modal-project-description ul li {
+    margin-bottom: 5px; /* Espaçamento entre itens da lista */
+}
+#modal-project-description h4 {
+    margin-top: 20px; /* Aumentado */
+    margin-bottom: 8px; /* Aumentado */
+    color: var(--accent-color);
+    font-family: var(--font-title);
+    font-size: 1.1rem;
+}
+#modal-project-tags.project-tags span { /* Especificidade para tags no modal */
+    background-color: var(--detail-color); /* Reaplicando, pois a div pai tem id */
+    color: var(--accent-color);
+}
+#modal-project-link.cta-button { /* Especificidade para o botão no modal */
+    margin-top: 25px; /* Aumentado */
+    display: inline-block; /* Garantir que não seja none */
+}
+
 
 
 /* Animações On-Scroll */
@@ -580,23 +628,23 @@ footer {
     opacity: 0;
     transition-property: opacity, transform;
     transition-duration: 0.8s;
-    transition-timing-function: ease-out;
+    transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Easing com um leve "bounce" */
 }
 .animate-on-scroll.is-visible {
     opacity: 1;
-    transform: none !important; /* Reset transform quando visível */
+    transform: none !important;
 }
 .fade-in {
-    /* opacity: 0; já definido em .animate-on-scroll */
+    /* opacity: 0; (já definido em .animate-on-scroll) */
 }
 .fade-in-up {
-    transform: translateY(50px);
+    transform: translateY(60px); /* Aumentado para mais impacto */
 }
 .slide-in-left {
-    transform: translateX(-100px);
+    transform: translateX(-120px); /* Aumentado */
 }
 .slide-in-right {
-    transform: translateX(100px);
+    transform: translateX(120px); /* Aumentado */
 }
 .animate-on-scroll[style*="--animation-delay"] {
     transition-delay: var(--animation-delay, 0s);
@@ -608,21 +656,23 @@ footer {
     .section-title { font-size: 2.4rem; }
     #hero h1 { font-size: 3.5rem; }
     #hero .subtitle { font-size: 1.3rem; }
+    .about-image img { max-width: 300px; } /* Ajuste da imagem sobre */
 }
 
 @media (max-width: 768px) {
     #main-header nav ul {
-        display: none; /* Esconde menu desktop */
+        display: none;
         flex-direction: column;
         position: absolute;
         top: var(--header-height);
         left: 0;
         width: 100%;
-        background-color: rgba(10, 10, 10, 0.95);
+        background-color: rgba(10, 10, 10, 0.98); /* Mais opaco */
         padding: 10px 0;
+        box-shadow: 0 5px 10px rgba(0,0,0,0.2); /* Sombra para o menu mobile */
     }
     #main-header nav ul.active {
-        display: flex; /* Mostra menu mobile */
+        display: flex;
     }
     #main-header nav ul li {
         width: 100%;
@@ -631,9 +681,13 @@ footer {
     #main-header nav ul li a {
         display: block;
         padding: 15px;
+        border-bottom: 1px solid var(--detail-color); /* Separador */
+    }
+    #main-header nav ul li:last-child a {
+        border-bottom: none;
     }
     #mobile-menu-toggle {
-        display: block; /* Mostra botão hamburguer */
+        display: block;
     }
 
     .section-title { font-size: 2rem; margin-bottom: 40px;}
@@ -645,15 +699,28 @@ footer {
     .about-image img { margin: 0 auto 30px auto; }
 
     .skills-grid, .projects-grid, .services-grid {
-        grid-template-columns: 1fr; /* Uma coluna em mobile */
+        grid-template-columns: 1fr;
     }
-    .modal-content { margin: 20% auto; width: 95%; }
+    .modal-content { margin: 10% auto; width: 95%; padding: 25px; } /* Ajuste do modal para mobile */
 }
 
 @media (max-width: 480px) {
+    body { font-size: 15px; /* Base font size para mobile */ }
     .container { padding: 0 15px; }
+    .section-title { font-size: 1.8rem; }
     #hero h1 { font-size: 2.2rem; }
     #hero .subtitle { font-size: 1rem; }
     .cta-button { font-size: 0.9rem; padding: 10px 25px; }
     .project-info h3 {font-size: 1.3rem;}
+    .form-group { margin-bottom: 25px; }
+    .form-group input, .form-group textarea, .form-group label { font-size: 0.95rem; }
+    .form-group label { top: 13px; }
+    .form-group input:focus + label,
+    .form-group input:valid + label,
+    .form-group textarea:focus + label,
+    .form-group textarea:valid + label {
+        top: -8px;
+        font-size: 0.75rem;
+    }
+    #modal-project-title { font-size: 1.5rem; }
 }
